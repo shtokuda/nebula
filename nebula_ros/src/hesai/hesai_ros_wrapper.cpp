@@ -8,6 +8,7 @@
 #include <nebula_common/nebula_common.hpp>
 #include <nebula_decoders/nebula_decoders_common/angles.hpp>
 
+#include <algorithm>
 #include <cstdint>
 #include <filesystem>
 #include <memory>
@@ -411,7 +412,7 @@ rcl_interfaces::msg::SetParametersResult HesaiRosWrapper::on_parameter_change(
   return rcl_interfaces::build<SetParametersResult>().successful(true).reason("");
 }
 
-void HesaiRosWrapper::receive_cloud_packet_callback(std::vector<uint8_t> & packet)
+void HesaiRosWrapper::receive_cloud_packet_callback(const std::vector<uint8_t> & packet)
 {
   if (!decoder_wrapper_ || decoder_wrapper_->status() != Status::OK) {
     return;
@@ -424,7 +425,7 @@ void HesaiRosWrapper::receive_cloud_packet_callback(std::vector<uint8_t> & packe
   auto msg_ptr = std::make_unique<nebula_msgs::msg::NebulaPacket>();
   msg_ptr->stamp.sec = static_cast<int>(timestamp_ns / 1'000'000'000);
   msg_ptr->stamp.nanosec = static_cast<int>(timestamp_ns % 1'000'000'000);
-  msg_ptr->data.swap(packet);
+  msg_ptr->data = packet;
 
   decoder_wrapper_->process_cloud_packet(std::move(msg_ptr));
 }
