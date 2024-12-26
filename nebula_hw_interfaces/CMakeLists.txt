@@ -111,6 +111,17 @@ install(DIRECTORY include/ DESTINATION include/${PROJECT_NAME})
 if(BUILD_TESTING)
     find_package(ament_lint_auto REQUIRED)
     ament_lint_auto_find_test_dependencies()
+
+    find_package(ament_cmake_gtest REQUIRED)
+
+    ament_add_gtest(test_udp
+        test/common/test_udp.cpp
+    )
+
+    target_include_directories(test_udp PUBLIC
+        ${nebula_common_INCLUDE_DIRS}
+        include
+        test)
 endif()
 
 ament_export_include_directories("include/${PROJECT_NAME}")
