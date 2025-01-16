@@ -3,7 +3,7 @@
   <arg name="sensor_model" default="Aeries2">
     <choice value="Aeries2" />
   </arg>
-  <push-ros-namespace namespace="sensing/lidar"/>
+  <push-ros-namespace namespace="sensing/lidar/top_middle_aeva"/>
 
   <arg name="config_file"
     default="$(find-pkg-share nebula_ros)/config/lidar/aeva/$(var sensor_model).param.yaml" />

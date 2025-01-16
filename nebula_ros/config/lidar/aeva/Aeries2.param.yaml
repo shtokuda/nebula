@@ -2,7 +2,7 @@
   ros__parameters:
     sensor_ip: 192.168.2.221
     launch_hw: true
-    frame_id: top_middle_aeva
+    frame_id: lidar_top_middle_aeva
     sensor_model: Aeries2
     setup_sensor: true
     diag_span: 1000
@@ -21,7 +21,7 @@
     scanner.horizontal_fov_degrees: 35Degrees
     scanner.roi_az_offset_rad: 0.0
     scanner.vertical_pattern: 96-14.4-ROI
-    system_config.range_modes: Normal Range
+    system_config.range_modes: Ultra Long Range
     system_config.sensitivity_mode: normal
     system_config.thermal_throttling_setting: Active
     spc_converter.discard_points_in_ambiguity_region: false
